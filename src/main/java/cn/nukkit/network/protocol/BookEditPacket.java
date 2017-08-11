@@ -1,5 +1,8 @@
 package cn.nukkit.network.protocol;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class BookEditPacket extends DataPacket {
     
     public static final int TYPE_REPLACE_PAGE = 0;
@@ -28,6 +31,33 @@ public class BookEditPacket extends DataPacket {
     public void decode() {
         this.type = this.getByte();
         this.inventorySlot = this.getByte();
+
+        switch (this.type) {
+            case TYPE_REPLACE_PAGE:
+            case TYPE_ADD_PAGE:
+                this.pageNumber = this.getByte();
+                this.content1 = this.getString();
+                this.content2 = this.getString();
+                break;
+            case TYPE_DELETE_PAGE:
+                this.pageNumber = this.getByte();
+                break;
+            case TYPE_SWAP_PAGES:
+                this.pageNumber = this.getByte();
+                this.secondaryPageNumber = this.getByte();
+                break;
+            case TYPE_SIGN_BOOK:
+                this.title = this.getString();
+                this.author = this.getString();
+                break;
+            default: {
+                try {
+                    throw new Exception("Unknown book edit type this.type!");
+                } catch (Exception ex) {
+                    Logger.getLogger(BookEditPacket.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
@@ -35,6 +65,33 @@ public class BookEditPacket extends DataPacket {
         this.reset();
         this.putByte((byte) this.type);
         this.putByte((byte) this.inventorySlot);
+
+        switch (this.type) {
+            case TYPE_REPLACE_PAGE:
+            case TYPE_ADD_PAGE:
+                this.putByte((byte) this.pageNumber);
+                this.putString(this.content1);
+                this.putString(this.content2);
+                break;
+            case TYPE_DELETE_PAGE:
+                this.putByte((byte) this.pageNumber);
+                break;
+            case TYPE_SWAP_PAGES:
+                this.putByte((byte) this.pageNumber);
+                this.putByte((byte) this.secondaryPageNumber);
+                break;
+            case TYPE_SIGN_BOOK:
+                this.putString(this.title);
+                this.putString(this.author);
+                break;
+            default: {
+                try {
+                    throw new Exception("Unknown book edit type this.type!");
+                } catch (Exception ex) {
+                    Logger.getLogger(BookEditPacket.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
     
 }
