@@ -5,10 +5,10 @@ import cn.nukkit.entity.data.EntityMetadata;
 import cn.nukkit.utils.Binary;
 
 /**
- * author: MagicDroidX
- * Nukkit Project
+ * author: MagicDroidX Nukkit Project
  */
 public class AddEntityPacket extends DataPacket {
+
     public static final byte NETWORK_ID = ProtocolInfo.ADD_ENTITY_PACKET;
 
     @Override
@@ -33,11 +33,17 @@ public class AddEntityPacket extends DataPacket {
 
     @Override
     public void decode() {
-
+        this.entityUniqueId = this.getVarLong();
+        this.entityRuntimeId = this.getVarLong();
+        this.type = (int) this.getUnsignedVarInt();
+        //x,y,z
+	//speed
+	this.pitch = this.getLFloat();
+	this.yaw = this.getLFloat();
     }
 
     @Override
-    public void encode() {
+    public void encode() { 
         this.reset();
         this.putVarLong(this.entityUniqueId);
         this.putVarLong(this.entityRuntimeId);

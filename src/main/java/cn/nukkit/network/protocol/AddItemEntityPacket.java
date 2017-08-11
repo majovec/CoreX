@@ -29,7 +29,12 @@ public class AddItemEntityPacket extends DataPacket {
 
     @Override
     public void decode() {
-
+        this.entityUniqueId = this.getVarLong();
+        this.entityRuntimeId = this.getVarLong();
+        this.item = this.getSlot();
+        //x,y,z
+        //speed
+        //metadata
     }
 
     @Override

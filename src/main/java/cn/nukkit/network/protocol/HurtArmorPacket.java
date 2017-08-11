@@ -11,6 +11,7 @@ public class HurtArmorPacket extends DataPacket {
 
     @Override
     public void decode() {
+        this.health = this.getVarInt();
 
     }
 
