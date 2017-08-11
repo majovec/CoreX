@@ -39,8 +39,8 @@ class ClientChainDataTest {
 				data.getDeviceOS(), data.getGameVersion(),
 				data.getGuiScale(), data.getLanguageCode(),
 				data.getXUID(), data.getCurrentInputMode(),
-				data.getDefaultInputMode(), data.getADRole(),
-				data.getTenantId(), data.getUIProfile()
+				data.getDefaultInputMode(), data.getCurrentInputMode(),
+				data.getClientId(), data.getUIProfile()
 		);
 		String expecting = "userName=lmlstarqaq, clientUUID=8323afe1-641e-3b61-9a92-d5d20b279065, " +
 				"identityPublicKey=MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE4lyvA1iVhV2u3pLQqJAjJnJZSlSjib8mM1uB5h5yqOBSvCHW+nZxDmkOAW6MS1GA7yGHitGmfS4jW/yUISUdWvLzEWJYOzphb3GNh5J1oLJRwESc5278i4MEDk1y21/q, " +
